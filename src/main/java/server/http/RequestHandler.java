@@ -1,13 +1,15 @@
 package server.http;
 
+import server.http.request.HttpRequest;
+import server.http.request.Request;
+
 public class RequestHandler {
 
     // Returns the response as a String
     public String handleRequest(String requestString){
+        Request request = new HttpRequest(requestString);
         return createTestHttpResponse();
     }
-
-
 
     private String createTestHttpResponse(){
         StringBuilder sb = new StringBuilder();
@@ -20,4 +22,6 @@ public class RequestHandler {
 
         return sb.toString();
     }
+
+
 }

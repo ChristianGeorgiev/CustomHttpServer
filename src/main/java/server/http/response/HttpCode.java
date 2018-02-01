@@ -1,6 +1,6 @@
-package server.http;
+package server.http.response;
 
-public enum  HttpCode {
+enum  HttpCode {
     OK("200 OK"),
     CREATED("201 Created"),
     NO_CONTENT("204 No Content"),
