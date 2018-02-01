@@ -48,4 +48,9 @@ public class HttpRequest implements Request {
     private String extractMethod(String line) {
         return line.split("\\s+")[0];
     }
+
+    @Override
+    public String getRequestUrl() {
+        return this.requestUrl;
+    }
 }
