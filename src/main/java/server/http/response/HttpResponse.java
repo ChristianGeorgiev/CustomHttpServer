@@ -14,22 +14,20 @@ public class HttpResponse implements Response {
     private HttpCode status;
     private Map<String, String> headers;
     private File content;
-    private String urlPath;
 
     public HttpResponse(HttpCode status, File content) {
         this.headers = new HashMap<>();
-        this.urlPath = urlPath;
         this.status = status;
         this.content = content;
     }
 
     @Override
-    public void addHeader(String header, String value){
+    public void addHeader(String header, String value) {
         this.headers.put(header, value);
     }
 
     @Override
-    public String getResponse(){
+    public String getResponse() {
         StringBuilder result = new StringBuilder();
         result.append(HTTP_VERSION).append(" ")
                 .append(this.status.getStatusMessage())
@@ -42,16 +40,12 @@ public class HttpResponse implements Response {
 
         result.append(System.lineSeparator());
 
-
-        if (this.content != null) {
-            try {
-                result.append(Reader.readAllBytes(new FileInputStream(this.content)));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }else {
-            result.append("<h1>You messed up</h1>");
+        try {
+            result.append(Reader.readAllBytes(new FileInputStream(this.content)));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
         return result.toString();
     }
 }

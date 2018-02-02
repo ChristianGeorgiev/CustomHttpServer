@@ -10,17 +10,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RequestHandler {
-    private static final String APP_FOLDER_PATH = "C:\\Users\\krist\\Desktop\\Softuni\\IntelliJ_Projects\\CustomHttpServer\\src\\main\\java\\application";
+
     private Map<String, File> views = new HashMap<>();
 
 
-    // Returns the response as a String
     public String handleRequest(String requestString) {
-        scanApplicationForHtmlFiles(new File(APP_FOLDER_PATH));
+        scanApplicationForHtmlFiles(new File(WebConstants.APP_FOLDER_PATH));
         Request request = new HttpRequest(requestString);
 
         if (!this.views.containsKey(request.getRequestUrl())){
-            return new HttpResponse(HttpCode.NOT_FOUND, null).getResponse();
+            return new HttpResponse(HttpCode.NOT_FOUND,
+                    new File(WebConstants.DEFAULT_404_PAGE_PATH)).getResponse();
         }
 
         Response response = new HttpResponse(HttpCode.OK, this.views.get(request.getRequestUrl()));

@@ -1,8 +1,10 @@
 package server.http;
 
+import server.http.response.HttpResponse;
 import server.utils.Reader;
 import server.utils.Writer;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -45,6 +47,11 @@ public class ConnectionHandler extends Thread {
             this.clientSocketOutputStream.close();
             this.clientSocket.close();
         }catch (IOException e){
+            try {
+                Writer.writeAllBytes(new HttpResponse(HttpCode.INTERNAL_SERVER_ERROR, new File(WebConstants.DEFAULT_500_PAGE_PATH)).getResponse(), this.clientSocketOutputStream);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
             e.printStackTrace();
         }
     }
