@@ -32,8 +32,8 @@ public class HttpResponse implements Response {
     public String getResponse(){
         StringBuilder result = new StringBuilder();
         result.append(HTTP_VERSION).append(" ")
-              .append(this.status.getStatusMessage())
-              .append(System.lineSeparator());
+                .append(this.status.getStatusMessage())
+                .append(System.lineSeparator());
 
         this.headers.forEach((key, value) -> result.append(key)
                 .append(": ")
