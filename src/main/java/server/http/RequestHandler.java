@@ -24,9 +24,6 @@ public class RequestHandler {
         }
 
         Response response = new HttpResponse(HttpCode.OK, this.views.get(request.getRequestUrl()));
-        response.addHeader("Content-Type", "text/html");
-        response.addHeader("Date", "ei sq");
-
         return response.getResponse();
     }
 

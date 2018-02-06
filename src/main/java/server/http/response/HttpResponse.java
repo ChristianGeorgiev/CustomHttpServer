@@ -5,11 +5,13 @@ import server.utils.Reader;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HttpResponse implements Response {
     private static final String HTTP_VERSION = "HTTP/1.1";
+
 
     private HttpCode status;
     private Map<String, String> headers;
@@ -28,6 +30,7 @@ public class HttpResponse implements Response {
 
     @Override
     public String getResponse() {
+        initDefaultHeaders();
         StringBuilder result = new StringBuilder();
         result.append(HTTP_VERSION).append(" ")
                 .append(this.status.getStatusMessage())
@@ -47,5 +50,10 @@ public class HttpResponse implements Response {
         }
 
         return result.toString();
+    }
+
+    private void initDefaultHeaders(){
+        this.addHeader("Content-Type", "text/html");
+        this.addHeader("Date", new Date().toString());
     }
 }
