@@ -1,4 +1,4 @@
-The project is a simple, basic HTTP server. 
+The project is a HTTP Server, that has very basic functionality
 
 Functionality:
 - the server can listen on a given port for requests
